@@ -6,7 +6,7 @@ def main():
         patient_id="P0004"
     )
     result = graph.invoke(state)
-    print(result)
+    print(result["report"])
 
 
 if __name__ == "__main__":

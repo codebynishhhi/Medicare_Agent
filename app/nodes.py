@@ -1,5 +1,5 @@
 from app.repository import RepositoryLoader as PatientLoader
-from app.tools import analyse_patient
+from app.tools import analyse_patient, generate_report
 from app.schemas import AgentState
 
 # load the patient 
@@ -16,4 +16,10 @@ def load_patient_node(state: AgentState):
 def analyse_patient_node(state:AgentState):
     analysis = analyse_patient(state.patient)
     state.analysis = analysis
-    return analysis
+    return state
+
+# Node 3 - report generation
+def generate_report_node(state:AgentState):
+    report = generate_report(state.patient,state.analysis,)
+    state.report = report
+    return state
