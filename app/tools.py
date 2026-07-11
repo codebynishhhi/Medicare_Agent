@@ -32,7 +32,14 @@ def generate_report(patient:PatientRecord, analysis:PatientAnalysis) -> str:
         clinical_summary = analysis.clinical_summary,
         recommendations = "\n".join(f"- {item}" for item in analysis.recommendations),
         follow_up_required = analysis.follow_up_required,
-        priority_score = analysis.priority_score
+        priority_score = analysis.priority_score,
+        last_visit_date = patient.last_visit_date,
+        missed_last_appointment= patient.missed_last_appointment,
+        next_follow_up = analysis.appointment_plan.next_follow_up,
+        appointment_type = analysis.appointment_plan.appointment_type,
+        reason = analysis.appointment_plan.reason
     )
  
     return report
+
+

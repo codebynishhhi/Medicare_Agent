@@ -27,6 +27,13 @@ class PatientRecord(BaseModel):
     notes: Optional[str] = None
 
 
+
+class AppointmentPlan(BaseModel):
+    """ This is used top design the appointment schedule of the patient"""
+    next_follow_up: str
+    appointment_type: str
+    reason : str
+
 class PatientAnalysis(BaseModel):
     """
     Structured response returned by the LLM.
@@ -37,17 +44,13 @@ class PatientAnalysis(BaseModel):
     follow_up_required: bool
     recommendations: list[str]
     priority_score: int
-
+    lifestyle_recomendations : list[str]
+    appointment_plan : Optional[AppointmentPlan]
 
 class AgentState(BaseModel):
-    """
-    Shared LangGraph state.
-    """
+    """ Shared LangGraph state. """
 
     patient_id: str
-
     patient: Optional[PatientRecord] = None
-
     analysis: Optional[PatientAnalysis] = None
-
     report: Optional[str] = None

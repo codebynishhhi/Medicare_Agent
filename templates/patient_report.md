@@ -10,20 +10,18 @@ Age: {age}
 
 Gender: {gender}
 
----
+--------------------------------------------------------
 
 ## Diagnosis
 
 {diagnosis}
 
----
-
+--------------------------------------------------------
 ## Current Medication
 
 {current_medication}
 
----
-
+--------------------------------------------------------
 ## Clinical Assessment
 
 Risk Level:
@@ -33,10 +31,8 @@ Clinical Summary:
 
 {clinical_summary}
 
----
-
+--------------------------------------------------------
 ## Recommended Actions
-
 {recommendations}
 
 ---
@@ -45,5 +41,15 @@ Clinical Summary:
 
 {follow_up_required}
 
-Priority Score:
-{priority_score}
+Priority Score:{priority_score}
+
+--------------------------------------------------------
+## Appointment Details 
+
+Last hospital visit : {last_visit_date}
+Total Missed Appointments : {missed_last_appointment}
+Next Scheduled Follow-up : {next_follow_up}
+Appointment Type : {appointment_type}
+Reason For Next Appointment : {reason}
+
+--------------------------------------------------------
