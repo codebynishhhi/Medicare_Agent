@@ -1,33 +1,48 @@
-from langchain_litellm import ChatLiteLLM
+import json
+
+from litellm import completion
+from pydantic import BaseModel
 
 from app.config import settings
-from app.schemas import PatientAnalysis
 
 
 class LLMGateway:
     """
-    Centralized LLM Gateway.
-
-    The rest of the application should never know
-    whether we are using Groq, OpenAI, Gemini or Claude.
+    Generic LLM Gateway using LiteLLM.
+    Responsible for:
+    - Calling the model
+    - Parsing JSON
+    - Validating using Pydantic
     """
 
-    def __init__(self):
+    def generate_structured(
+        self,
+        prompt: str,
+        schema: type[BaseModel],
+    ):
 
-        self.llm = ChatLiteLLM(
-
+        response = completion(
             model=settings.model_name,
-
             api_key=settings.groq_api_key,
-
             temperature=settings.temperature,
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
         )
 
-    def analysis_model(self):
+        content = response.choices[0].message.content
 
-        return self.llm.with_structured_output(
-            PatientAnalysis
-        )
+        try:
+            data = json.loads(content)
+        except Exception as e:
+            raise ValueError(
+                f"LLM did not return valid JSON.\n\nResponse:\n{content}"
+            ) from e
+
+        return schema(**data)
 
 
 llm_gateway = LLMGateway()

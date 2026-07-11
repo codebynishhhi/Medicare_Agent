@@ -30,7 +30,7 @@ class PatientRecord(BaseModel):
 
 class AppointmentPlan(BaseModel):
     """ This is used top design the appointment schedule of the patient"""
-    next_follow_up: str
+    next_follow_up: date
     appointment_type: str
     reason : str
 
@@ -44,8 +44,7 @@ class PatientAnalysis(BaseModel):
     follow_up_required: bool
     recommendations: list[str]
     priority_score: int
-    lifestyle_recomendations : list[str]
-    appointment_plan : Optional[AppointmentPlan]
+    appointment_plan : Optional[AppointmentPlan] = None
 
 class AgentState(BaseModel):
     """ Shared LangGraph state. """
