@@ -44,7 +44,7 @@ class AgentState(BaseModel):
     Shared LangGraph state.
     """
 
-    patient_id: int
+    patient_id: str
 
     patient: Optional[PatientRecord] = None
 
