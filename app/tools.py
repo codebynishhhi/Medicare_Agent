@@ -1,5 +1,5 @@
 from pathlib import Path
-from app.llm import llm_client
+from app.llm import llm_gateway
 from app.schemas import PatientAnalysis, PatientRecord
 from app.utils import prompt_util, template_util
 
@@ -14,7 +14,7 @@ def analyse_patient(patient:PatientRecord) -> PatientAnalysis:
             Patient Information
             {patient.model_dump_json(indent=2)}
     """
-    structure_llm = llm_client.analysis_model()
+    structure_llm = llm_gateway.analysis_model()
     response = structure_llm.invoke(final_prompt)
     return response
 
